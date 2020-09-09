@@ -17,6 +17,7 @@ int main (){
     	printf("shell es igual a exit\n");
     }else if(strncmp("shutdown",shell,7)==0){
 		printf("shell es igual shutdown\n");
+		execlp("kilall","killall","-g","init",NULL);
     }else{
 		printf("es cualquier otro comando %s\n",shell);
     }
