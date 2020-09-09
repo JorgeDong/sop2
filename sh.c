@@ -4,5 +4,8 @@
 
 
 int main (){
+
+    execl("/bin/sh","sh","-c","ps",NULL);
+    sleep(10);
     
 }

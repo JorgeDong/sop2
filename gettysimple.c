@@ -46,38 +46,38 @@ int main (){
            nchar=0;
         }
     }
-
-    while(1){
     printf("%d",lines);
     printf("user:");
-    fgets(cuser,25,stdin);
+    fgets(cuser,10,stdin);
     printf("password:");
-    fgets(cpasswd,25,stdin);
+    fgets(cpasswd,8,stdin);
 
     //printf("%ld",strlen(users[0][0]));
-    int login=0;
+
     //Verify login
-    for(int i=0;i<=lines;i++){
-    if(strncmp(cuser,users[i][0],strlen(users[i][0]))==0) {
-        printf("Usuario Correcto");
-        if(strncmp(cpasswd,users[i][1],strlen(users[i][1]))==0){
-            login=1;
-            printf("Acceso Correcto");
-        }
-    }     
-    }
-    
-    //sh
-    if(login){
+    if(strncmp(cuser,users[0][0],strlen(users[0][0]))==0) {
+        printf("Son iguales");
+    }  
+
+    // //sh
      int pid=fork();
      if (pid==0){
-         sleep(10);
          execlp("./sh","sh",NULL);
      }
+
      wait(NULL);
-    }
+
+
+
+
     
-    }
+    
+
+
+
+
+
+
 
 
     // CHECK PASSWD.TXT
