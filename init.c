@@ -14,13 +14,16 @@ int main (){
     for(int i=0;i<6;i++){
         pid=fork();
 		if(pid==0){
-            execlp("./getty","getty",NULL);
+           // execlp("./getty","getty",NULL);
+           execlp("xterm","xterm","-hold","-e","./getty",NULL);
         }
     }
+    
     while (wait(&status)>0){
         pid=fork();
 		if(pid==0){
-            execlp("./getty","getty",NULL);
+            //execlp("./getty","getty",NULL);
+            execlp("xterm","xterm","-hold","-e","./getty",NULL);
         }
     }
     
