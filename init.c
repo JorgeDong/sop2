@@ -16,7 +16,7 @@ int main (){
         pid=fork();
 		if(pid==0){
            // execlp("./getty","getty",NULL);
-           execlp("xterm","xterm","-hold","-e","./getty",NULL);
+           execlp("xterm","xterm","-e","./getty",NULL);
         }
     }
     
@@ -24,7 +24,7 @@ int main (){
         pid=fork();
 		if(pid==0){
             //execlp("./getty","getty",NULL);
-            execlp("xterm","xterm","-hold","-e","./getty",NULL);
+            execlp("xterm","xterm","-e","./getty",NULL);
         }
     }
     

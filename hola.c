@@ -4,6 +4,7 @@
 
 
 int main (){
-    printf("hola mundo\n");
     sleep(10);
+    printf("hola mundo\n");
+    
 }

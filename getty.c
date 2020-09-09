@@ -48,35 +48,36 @@ int main (){
     }
 
     while(1){
-    printf("%d",lines);
     printf("user:");
     fgets(cuser,25,stdin);
     printf("password:");
     fgets(cpasswd,25,stdin);
-
     //printf("%ld",strlen(users[0][0]));
     int login=0;
     //Verify login
     for(int i=0;i<=lines;i++){
     if(strncmp(cuser,users[i][0],strlen(users[i][0]))==0) {
-        printf("Usuario Correcto");
+        //printf("Usuario Correcto");
         if(strncmp(cpasswd,users[i][1],strlen(users[i][1]))==0){
             login=1;
-            printf("Acceso Correcto");
+            //printf("Acceso Correcto\n");
         }
-    }     
+    }   
     }
     
     //sh
     if(login){
      int pid=fork();
      if (pid==0){
-         sleep(10);
          execlp("./sh","sh",NULL);
      }
-     printf("Esperando");
+    //printf("Esperando");
       wait(NULL);
-    }
+      //exit(0);
+      login=0;
+    }else{
+        printf("Usuario y/o password incorrecto\n");
+    } 
     
     }
 
