@@ -9,30 +9,18 @@
 int main (){
     int pid;
     int status;
-    printf("hola mundo INIT\n");
 
-
-    for(int i=0;i<6;i++){
+    for(int i=0;i<6;i++){ //Crear 6 procesos hijos 
         pid=fork();
 		if(pid==0){
-           // execlp("./getty","getty",NULL);
-           execlp("xterm","xterm","-e","./getty",NULL);
+           execlp("xterm","xterm","-e","./getty",NULL); //imagen remplazada por procesos getty
         }
     }
     
-    while (wait(&status)>0){
+    while (wait(&status)>0){ //Si un proceso hijo (getty) es terminado por el usuario.(Mantener 6)
         pid=fork();
 		if(pid==0){
-            //execlp("./getty","getty",NULL);
-            execlp("xterm","xterm","-e","./getty",NULL);
+            execlp("xterm","xterm","-e","./getty",NULL); // crear un nuevo proceso getty. 
         }
     }
-    
-    for(int i=0;i<6;i++){
-		wait(&status);
-    }
-
-
-    
-    printf("FIN init");
 }

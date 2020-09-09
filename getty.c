@@ -10,36 +10,35 @@ int main (){
     char ch;
     int lines=0;
     int nuser=0;
-    int nchar=0;
+    int nchar=0; 
     int flag=0;
-    char users[20][2][100];
-    char cuser[25];
-    char cpasswd[25];
+    char users[20][2][100]; //Base de datos
+    char cuser[25]; //current user
+    char cpasswd[25]; // current passwd
+
     FILE *file;
-    file=fopen("passwd.txt","r");
+    file=fopen("passwd.txt","r");//abrimos el archivo en modo lectura
 
     if(file==NULL){
         perror("Error while opening file\n");
         exit(EXIT_FAILURE);
     }
 
-    //save Login credentials
+    //leer datos del archivo y guardarlos en arreglo users
     while((ch=fgetc(file))!=EOF){
-        
-        if(ch==':'){
+        if(ch==':'){ //Con ":" identificamos si el caracter pertenece a usuario o passwd
             flag=1;
             nchar=0;
         }else{
             if(flag==0){
-            users[nuser][flag][nchar]=ch;
+            users[nuser][flag][nchar]=ch; //guardamos en users[] en el campo para user
             nchar++;
             }else{
-            users[nuser][flag][nchar]=ch;
+            users[nuser][flag][nchar]=ch;//guardamos en users[] en el campo para la passwd
             nchar++;
             }
         }
-        // printf("%c [%d][%d][%d]\n",ch,nuser,flag,nchar);
-        if(ch=='\n'){
+        if(ch=='\n'){ //Con "\n" identificamos que existe otro usuario
             lines++;
             flag=0;
            nuser++; 
@@ -47,50 +46,33 @@ int main (){
         }
     }
 
-    while(1){
+    while(1){ //Mostrar el usuario el prompt de login y passwd para iniciar sesion
     printf("user:");
     fgets(cuser,25,stdin);
     printf("password:");
     fgets(cpasswd,25,stdin);
-    //printf("%ld",strlen(users[0][0]));
     int login=0;
-    //Verify login
+    //Verificar el usuario y contraseña
     for(int i=0;i<=lines;i++){
-    if(strncmp(cuser,users[i][0],strlen(users[i][0]))==0) {
-        //printf("Usuario Correcto");
-        if(strncmp(cpasswd,users[i][1],strlen(users[i][1]))==0){
-            login=1;
-            //printf("Acceso Correcto\n");
+    if(strncmp(cuser,users[i][0],strlen(users[i][0]))==0) { //comparamos usuario ingresado con usuarios existentes
+        if(strncmp(cpasswd,users[i][1],strlen(users[i][1]))==0){//comparamos contraseña ingresada con contraseña de usuario
+            login=1; //permitimos acceso
         }
     }   
     }
     
-    //sh
-    if(login){
+    
+    if(login){// Si se ingresó, crear proceso hijo
      int pid=fork();
      if (pid==0){
-         execlp("./sh","sh",NULL);
+         execlp("./sh","sh",NULL); //proceso hijo sera reemplazado por sesion del shell
      }
-    //printf("Esperando");
-      wait(NULL);
-      //exit(0);
+      wait(NULL); //Esperar a que cierre el shell
       login=0;
     }else{
         printf("Usuario y/o password incorrecto\n");
     } 
-    
+    //Volver a pedir credenciales de login.(while)
     }
-
-
-    // CHECK PASSWD.TXT
-    // for(int i=0;i<2;i++){
-    //     for(int j=0;j<2;j++){
-    //         printf("\n");
-    //         for(int k=0;k<12;k++){
-    //             printf("%c",users[i][j][k]);
-    //         }
-    //     }
-    // }
-
 
 }
