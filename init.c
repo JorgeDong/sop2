@@ -11,6 +11,7 @@ int main (){
     int status;
     printf("hola mundo INIT\n");
 
+
     for(int i=0;i<6;i++){
         pid=fork();
 		if(pid==0){
@@ -30,6 +31,8 @@ int main (){
     for(int i=0;i<6;i++){
 		wait(&status);
     }
+
+
     
     printf("FIN init");
 }

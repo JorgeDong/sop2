@@ -74,7 +74,8 @@ int main (){
          sleep(10);
          execlp("./sh","sh",NULL);
      }
-     wait(NULL);
+     printf("Esperando");
+      wait(NULL);
     }
     
     }
